@@ -14,7 +14,6 @@ import io.github.unhurried.example.backend.quarkus.resource.bean.ErrorBean;
 class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException> {
     @Override
     public Response toResponse(WebApplicationException e) {
-        System.out.println("WebApplicatinoExceptionMapper");
         return Response.status(e.getResponse().getStatus()).entity(new ErrorBean("web_application_error", "Something wrong happened.")).build();
     }
 }

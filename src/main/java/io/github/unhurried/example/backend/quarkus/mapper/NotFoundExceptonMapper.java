@@ -15,7 +15,6 @@ import io.github.unhurried.example.backend.quarkus.resource.bean.ErrorBean;
 class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
     @Override
     public Response toResponse(NotFoundException e) {
-        System.out.println("NotFoundExceptionMapper");
         return Response.status(Status.NOT_FOUND).entity(new ErrorBean("not_found", "The resource you are looking for doesn't exist.")).build();
     }
 }
