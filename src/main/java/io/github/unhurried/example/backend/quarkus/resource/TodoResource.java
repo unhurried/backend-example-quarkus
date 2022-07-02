@@ -16,7 +16,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -26,6 +25,7 @@ import io.github.unhurried.example.backend.quarkus.entity.TodoEntity;
 import io.github.unhurried.example.backend.quarkus.resource.bean.ListParam;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoListBean;
+import io.github.unhurried.example.backend.quarkus.resource.exception.UnauthorizedException;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.panache.common.Page;
 import io.quarkus.security.Authenticated;
@@ -42,7 +42,7 @@ public class TodoResource {
 
     private String getUserId() {
         final var sub = this.sContext.getUserPrincipal().getName();
-        if (sub == null) throw new WebApplicationException(Status.UNAUTHORIZED);
+        if (sub == null) throw new UnauthorizedException();
         return sub;
     }
 
