@@ -4,16 +4,13 @@ An example of a backend application built with [Quarkus](https://quarkus.io/).
 
 ## Libraries (Dependencies)
 
-Following are the libraries used in this project.
+Following are the libraries and features used in this project.
 
 * Language
-
   * Java 11
 * Build Tool
-
-  - Maven (Wrapper)
+  * Maven (Wrapper)
 * JAX-RS
-
   * [RESTEasy Reactive Jackson](https://quarkus.io/guides/resteasy-reactive) (quarkus-resteasy-reactive-jackson)
 * Database Access (O/R Mapper)
   * [Hibernate Reactive with Panache](https://quarkus.io/guides/hibernate-reactive-panache) (quarkus-hibernate-reactive-panache)
@@ -21,6 +18,10 @@ Following are the libraries used in this project.
   * [Hibernate Validator](https://quarkus.io/guides/validation) (quarkus-hibernate-validator)
 * Security
   * [SmallRye JWT](https://quarkus.io/guides/security-jwt) (quarkus-smallrye-jwt)
+* CDI
+  * [Java Interceptors (javax.interceptor) API implementation by Quarkus](https://quarkus.io/guides/cdi#interceptors)
+* Logging
+  * [Logging with Panache](https://quarkus.io/guides/logging#logging-with-panache)
 
 ## How to Start Development
 
