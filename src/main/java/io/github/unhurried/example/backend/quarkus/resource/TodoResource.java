@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 
 import io.github.unhurried.example.backend.quarkus.entity.TodoEntity;
+import io.github.unhurried.example.backend.quarkus.interceptor.Logged;
 import io.github.unhurried.example.backend.quarkus.resource.bean.ListParam;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoListBean;
@@ -31,6 +32,7 @@ import io.quarkus.panache.common.Page;
 import io.quarkus.security.Authenticated;
 import io.smallrye.mutiny.Uni;
 
+@Logged
 @Authenticated
 @Path("todos")
 @Consumes(MediaType.APPLICATION_JSON)
