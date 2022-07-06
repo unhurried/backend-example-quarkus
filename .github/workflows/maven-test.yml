@@ -2,7 +2,7 @@ name: Run unit tests with Maven
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/github_actions" ]
   pull_request:
     branches: [ "master" ]
 
@@ -18,4 +18,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test with Maven
-      run: mvn ts
+      run: mvn test
