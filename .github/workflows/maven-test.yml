@@ -19,3 +19,8 @@ jobs:
         cache: maven
     - name: Test with Maven
       run: mvn test site -DgenerateReports=false surefire-report:report
+    - name: Archive test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: target/surefire-reports
