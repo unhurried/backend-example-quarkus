@@ -2,9 +2,9 @@ name: Run unit tests with Maven
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/**" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "feature/**" ]
 
 jobs:
   build:
@@ -18,4 +18,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test with Maven
-      run: mvn ts
+      run: mvn test site -DgenerateReports=false surefire-report:report
+    - name: Archive test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: target/surefire-reports
+    - name: Archive test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: target/site
