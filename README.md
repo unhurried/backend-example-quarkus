@@ -2,7 +2,7 @@
 
 An example of a backend application built with [Quarkus](https://quarkus.io/).
 
-## Libraries (Dependencies)
+## Libraries (Dependencies) and Features
 
 Following are the libraries and features used in this project.
 
@@ -22,6 +22,11 @@ Following are the libraries and features used in this project.
   * [Java Interceptors (javax.interceptor) API implementation by Quarkus](https://quarkus.io/guides/cdi#interceptors)
 * Logging
   * [Logging with Panache](https://quarkus.io/guides/logging#logging-with-panache)
+* Testing
+  * [RESTAssured](https://quarkus.io/guides/getting-started-testing#restassured)
+* CI/CD
+  * GitHub Actions (To run tests on push and pull request)
+
 
 ## How to Start Development
 
@@ -44,3 +49,11 @@ The following Maven commands can be used to run or build this project. You can a
 # The native executables can be run with "./target/{project name and version}-runner"
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
 ```
+
+### Attach Debugger
+
+* Attach a debugger to port 5005 after running the application with `./mvnw quarkus:dev`.
+  * For Visual Studio Code, `launch.json` to attach a debugger is included. You can also start the application and attach a debugger with `Quarkus: Debug current Quarkus project` command provided by [Quarkus Tools for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus).
+
+
+
