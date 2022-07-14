@@ -4,7 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 
 
-import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean.Category;
+import io.github.unhurried.example.backend.quarkus.entity.TodoEntity.Category;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.runtime.StartupEvent;
 import io.quarkus.runtime.configuration.ProfileManager;

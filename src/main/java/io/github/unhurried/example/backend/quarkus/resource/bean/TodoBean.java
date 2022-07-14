@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
+import io.github.unhurried.example.backend.quarkus.entity.TodoEntity.Category;
 import io.github.unhurried.example.backend.quarkus.validator.EnumString;
 
 public class TodoBean {
@@ -20,8 +21,4 @@ public class TodoBean {
 
     @Pattern(regexp = "^\\p{Print}{1,256}$")
     public String content;
-
-    public enum Category {
-        one, two, three
-    }
 }

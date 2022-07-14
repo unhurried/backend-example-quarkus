@@ -26,7 +26,7 @@ import io.github.unhurried.example.backend.quarkus.interceptor.Logged;
 import io.github.unhurried.example.backend.quarkus.resource.bean.ListParam;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoListBean;
-import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean.Category;
+import io.github.unhurried.example.backend.quarkus.entity.TodoEntity.Category;
 import io.github.unhurried.example.backend.quarkus.resource.exception.UnauthorizedException;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.panache.common.Page;
