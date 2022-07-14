@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
-import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean.Category;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 
 @Entity
@@ -22,4 +21,8 @@ public class TodoEntity extends PanacheEntityBase {
     public Category category;
     public String content;
     public String userId;
+
+    public enum Category {
+        one, two, three
+    }
 }

@@ -26,6 +26,7 @@ import io.github.unhurried.example.backend.quarkus.interceptor.Logged;
 import io.github.unhurried.example.backend.quarkus.resource.bean.ListParam;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoBean;
 import io.github.unhurried.example.backend.quarkus.resource.bean.TodoListBean;
+import io.github.unhurried.example.backend.quarkus.entity.TodoEntity.Category;
 import io.github.unhurried.example.backend.quarkus.resource.exception.UnauthorizedException;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.panache.common.Page;
@@ -95,7 +96,9 @@ public class TodoResource {
                 .onItem().ifNull().continueWith(() -> { throw new NotFoundException(); })
                 .onItem().ifNotNull().transformToUni(entity -> {
                     entity.title = req.title;
-                    entity.category = req.category;
+                    for (var c: Category.values()) {
+                        if (c.toString().equals(req.category)) entity.category = c;
+                    }
                     entity.content = req.content;
                     return entity.persist();
                 });
@@ -123,7 +126,9 @@ public class TodoResource {
     private TodoEntity resourceToEntity(TodoBean resource, String userId) {
         var entity = new TodoEntity();
         entity.title = resource.title;
-        entity.category = resource.category;
+        for (var c: Category.values()) {
+            if (c.toString().equals(resource.category)) entity.category = c;
+        }
         entity.content = resource.content;
         entity.userId = userId;
         return entity;
@@ -133,7 +138,7 @@ public class TodoResource {
         var resource = new TodoBean();
         resource.id = entity.id.toString();
         resource.title = entity.title;
-        resource.category = entity.category;
+        resource.category = entity.category.toString();
         resource.content = entity.content;
         return resource;
     }
