@@ -8,12 +8,14 @@ import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import io.github.unhurried.example.backend.quarkus.resource.bean.ErrorBean;
+import io.quarkus.logging.Log;
 
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 class WebApplicationExceptionMapper implements ExceptionMapper<WebApplicationException> {
     @Override
     public Response toResponse(WebApplicationException e) {
+        Log.error(e);
         return Response.status(e.getResponse().getStatus()).entity(new ErrorBean("web_application_error", "Something wrong happened.")).build();
     }
 }
