@@ -21,10 +21,10 @@ public class DBInit {
 
     private void initdb() {
         var t = new TodoEntity();
-        t.title = "test item";
-        t.category = Category.one;
-        t.content = "This is a test item.";
-        t.userId = "sub-for-test";
+        t.setTitle("test item");
+        t.setCategory(Category.one);
+        t.setContent("This is a test item.");
+        t.setUserId("sub-for-test");
         Panache.<TodoEntity>withTransaction(t::persist).await().indefinitely();
     }
 }
