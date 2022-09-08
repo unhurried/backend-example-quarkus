@@ -6,8 +6,8 @@ import javax.ws.rs.core.Response.Status;
 import io.github.unhurried.example.backend.quarkus.resource.bean.ErrorBean;
 
 public class ResourceException extends WebApplicationException {
-    private Status status;
-    private ErrorBean body;
+    private final Status status;
+    private final ErrorBean body;
 
     public ResourceException(Status status, ErrorBean body) {
         this.status = status;

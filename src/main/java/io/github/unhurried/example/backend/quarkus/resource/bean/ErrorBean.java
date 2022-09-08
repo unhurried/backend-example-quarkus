@@ -1,11 +1,9 @@
 package io.github.unhurried.example.backend.quarkus.resource.bean;
 
-public class ErrorBean {
-    public String error;
-    public String message;
+import lombok.Value;
 
-    public ErrorBean(String error, String message) {
-        this.error = error;
-        this.message = message;
-    }
+@Value
+public class ErrorBean {
+    private final String error;
+    private final String message;
 }

@@ -59,8 +59,8 @@ public class TodoResource {
 
             return Uni.combine().all().unis(total, items).asTuple().<TodoListBean>map(t -> { 
                 var bean = new TodoListBean();
-                bean.total = Long.valueOf(t.getItem1());
-                bean.items = t.getItem2().stream().map(this::entityToResource).collect(Collectors.toList());
+                bean.setTotal(t.getItem1());
+                bean.setItems(t.getItem2().stream().map(this::entityToResource).collect(Collectors.toList()));
                 return bean;
             });
         });
