@@ -37,11 +37,11 @@ public class TodoResourceTest {
     public void test() {
         var mockUserId = UUID.randomUUID().toString();
         var mockEntity = new TodoEntity();
-        mockEntity.id = UUID.randomUUID();
-        mockEntity.title = "Test item";
-        mockEntity.category = Category.one;
-        mockEntity.content = "This is a test item";
-        mockEntity.userId = mockUserId;
+        mockEntity.setId(UUID.randomUUID());
+        mockEntity.setTitle("Test item");
+        mockEntity.setCategory(Category.one);
+        mockEntity.setContent("This is a test item");
+        mockEntity.setUserId(mockUserId);
         Uni<TodoEntity> mockUniEntity = Uni.createFrom().item(mockEntity);
 
         @SuppressWarnings("unchecked")
@@ -58,8 +58,8 @@ public class TodoResourceTest {
         var actual = todoResource.get(mockUserId)
             .subscribe().withSubscriber(UniAssertSubscriber.create()).assertCompleted().getItem();
         assertTrue(actual.id.matches("[a-z0-9-]{36}"));
-        assertEquals(mockEntity.title, actual.title);
-        assertEquals(mockEntity.category.toString(), actual.category);
-        assertEquals(mockEntity.content, actual.content);
+        assertEquals(mockEntity.getTitle(), actual.title);
+        assertEquals(mockEntity.getCategory().toString(), actual.category);
+        assertEquals(mockEntity.getContent(), actual.content);
     }
 }

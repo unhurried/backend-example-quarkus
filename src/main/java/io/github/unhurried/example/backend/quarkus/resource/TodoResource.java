@@ -70,7 +70,7 @@ public class TodoResource {
     public Uni<Response> create(@Valid TodoBean req) {
         var entity = resourceToEntity(req, getUserId());
         var resBody = Panache.<TodoEntity>withTransaction(entity::persist).map(this::entityToResource);
-        return resBody.map(b -> { return Response.status(Status.CREATED).entity(b).build(); });
+        return resBody.map(b -> Response.status(Status.CREATED).entity(b).build());
     } 
 
     @GET
@@ -91,20 +91,21 @@ public class TodoResource {
     public Uni<TodoBean> update(@PathParam("id") String id, @Valid TodoBean req) {
         final String userId = getUserId();
         var uuid = UUID.fromString(id);
-        return Panache.<TodoEntity>withTransaction(() -> {
-            return TodoEntity.<TodoEntity>find("id = ?1 and userId = ?2", uuid, userId).firstResult()
-                .onItem().ifNull().continueWith(() -> { throw new NotFoundException(); })
-                .onItem().ifNotNull().transformToUni(entity -> {
-                    entity.title = req.title;
-                    for (var c: Category.values()) {
-                        if (c.toString().equals(req.category)) entity.category = c;
-                    }
-                    entity.content = req.content;
-                    return entity.persist();
-                });
-        }).onItem().transform(entity -> {
-            return entityToResource(entity);
-        });
+        return Panache.<TodoEntity>withTransaction(
+                () -> TodoEntity.<TodoEntity>find("id = ?1 and userId = ?2", uuid, userId).firstResult()
+                        .onItem().ifNull().continueWith(() -> {
+                            throw new NotFoundException();
+                        })
+                        .onItem().ifNotNull().transformToUni(entity -> {
+                            entity.setTitle(req.title);
+                            for (var c : Category.values()) {
+                                if (c.toString().equals(req.category))
+                                    entity.setCategory(c);
+                            }
+                            entity.setContent(req.content);
+                            return entity.persist();
+                        }))
+                .onItem().transform(this::entityToResource);
     }
 
     @DELETE
@@ -112,34 +113,33 @@ public class TodoResource {
     public Uni<Void> delete(@PathParam("id") String id) {
         final String userId = getUserId();
         var uuid = UUID.fromString(id);
-        return Panache.withTransaction(() -> {
-            return TodoEntity.delete("id = ?1 and userId = ?2", uuid, userId);
-        }).onItem().transform(b -> {
-            if(b == 1) {
-                return null;
-            } else {
-                throw new NotFoundException();
-            }
-        });
+        return Panache.withTransaction(() -> TodoEntity.delete("id = ?1 and userId = ?2", uuid, userId))
+                .onItem().transform(b -> {
+                    if (b == 1) {
+                        return null;
+                    } else {
+                        throw new NotFoundException();
+                    }
+                });
     }
 
     private TodoEntity resourceToEntity(TodoBean resource, String userId) {
         var entity = new TodoEntity();
-        entity.title = resource.title;
+        entity.setTitle(resource.title);
         for (var c: Category.values()) {
-            if (c.toString().equals(resource.category)) entity.category = c;
+            if (c.toString().equals(resource.category)) entity.setCategory(c);
         }
-        entity.content = resource.content;
-        entity.userId = userId;
+        entity.setContent(resource.content);
+        entity.setUserId(userId);
         return entity;
     }
 
     private TodoBean entityToResource(TodoEntity entity) {
         var resource = new TodoBean();
-        resource.id = entity.id.toString();
-        resource.title = entity.title;
-        resource.category = entity.category.toString();
-        resource.content = entity.content;
+        resource.id = entity.getId().toString();
+        resource.title = entity.getTitle();
+        resource.category = entity.getCategory().toString();
+        resource.content = entity.getContent();
         return resource;
     }
 }
