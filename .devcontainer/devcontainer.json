@@ -23,6 +23,7 @@
 	},
 
 	"extensions": [
-		"redhat.vscode-quarkus"
+		"redhat.vscode-quarkus",
+		"SonarSource.sonarlint-vscode"
 	]
 }
