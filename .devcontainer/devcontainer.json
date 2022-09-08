@@ -20,5 +20,9 @@
 	"features": {
 		"docker-in-docker": "latest",
 		"java": "11"
-	}
+	},
+
+	"extensions": [
+		"redhat.vscode-quarkus"
+	]
 }
