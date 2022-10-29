@@ -1,7 +1,6 @@
 package io.github.unhurried.example.backend.quarkus.mapper;
 
 import javax.annotation.Priority;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
