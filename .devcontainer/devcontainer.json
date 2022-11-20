@@ -25,5 +25,10 @@
 	"extensions": [
 		"redhat.vscode-quarkus",
 		"SonarSource.sonarlint-vscode"
-	]
+	],
+	"portsAttributes": {
+		"3001": {
+			"label": "dev"
+		}
+	}
 }
